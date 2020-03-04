@@ -3,6 +3,7 @@ import argparse
 import copy
 import os
 import os.path as osp
+import platform
 import time
 
 import mmcv
@@ -32,7 +33,7 @@ def parse_args():
         type=int,
         default=1,
         help='number of gpus to use '
-        '(only applicable to non-distributed training)')
+             '(only applicable to non-distributed training)')
     parser.add_argument('--seed', type=int, default=None, help='random seed')
     parser.add_argument(
         '--deterministic',
@@ -48,6 +49,7 @@ def parse_args():
         '--autoscale-lr',
         action='store_true',
         help='automatically scale lr with the number of gpus')
+    parser.add_argument('--shutdown', action='store_true', help='shutdown after training.')
     args = parser.parse_args()
     if 'LOCAL_RANK' not in os.environ:
         os.environ['LOCAL_RANK'] = str(args.local_rank)
@@ -136,6 +138,13 @@ def main():
         validate=args.validate,
         timestamp=timestamp,
         meta=meta)
+    if args.shutdown:
+        assert platform.system() in ["Windows", "Linux"], "Only support Windows and Linux environment."
+        print("shutdown in 1 min.")
+        if platform.system() == "Windows":
+            os.system("shutdown /s /t 60")
+        if platform.system() == "Linux":
+            os.system("shutdown -h 60")
 
 
 if __name__ == '__main__':
