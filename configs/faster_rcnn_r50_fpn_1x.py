@@ -1,3 +1,4 @@
+IMG_SCALE = (224, 224)
 # model settings
 model = dict(
     type='FasterRCNN',
@@ -37,7 +38,8 @@ model = dict(
         in_channels=256,
         fc_out_channels=1024,
         roi_feat_size=7,
-        num_classes=81,
+        # num_classes=81,
+        num_classes=3,
         target_means=[0., 0., 0., 0.],
         target_stds=[0.1, 0.1, 0.2, 0.2],
         reg_class_agnostic=False,
@@ -105,7 +107,7 @@ img_norm_cfg = dict(
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', with_bbox=True),
-    dict(type='Resize', img_scale=(1333, 800), keep_ratio=True),
+    dict(type='Resize', img_scale=IMG_SCALE, keep_ratio=True),
     dict(type='RandomFlip', flip_ratio=0.5),
     dict(type='Normalize', **img_norm_cfg),
     dict(type='Pad', size_divisor=32),
@@ -116,7 +118,7 @@ test_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(
         type='MultiScaleFlipAug',
-        img_scale=(1333, 800),
+        img_scale=IMG_SCALE,
         flip=False,
         transforms=[
             dict(type='Resize', keep_ratio=True),
@@ -166,7 +168,8 @@ log_config = dict(
     ])
 # yapf:enable
 # runtime settings
-total_epochs = 12
+# total_epochs = 12
+total_epochs = 6
 dist_params = dict(backend='nccl')
 log_level = 'INFO'
 work_dir = './work_dirs/faster_rcnn_r50_fpn_1x'
