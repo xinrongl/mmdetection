@@ -114,5 +114,10 @@ data
 *.log.json
 work_dirs/
 
+# images
+*.jpg
+*.png
+*.tiff
+
 # Pytorch
 *.pth
