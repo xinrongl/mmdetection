@@ -24,6 +24,7 @@ def collect_env():
         env_info['CUDA_HOME'] = CUDA_HOME
 
         if CUDA_HOME is not None and osp.isdir(CUDA_HOME):
+            print(CUDA_HOME)
             try:
                 nvcc = osp.join(CUDA_HOME, 'bin/nvcc')
                 nvcc = subprocess.check_output(
@@ -39,8 +40,9 @@ def collect_env():
         for name, devids in devices.items():
             env_info['GPU ' + ','.join(devids)] = name
 
-    gcc = subprocess.check_output('gcc --version | head -n1', shell=True)
-    gcc = gcc.decode('utf-8').strip()
+    # gcc = subprocess.check_output('gcc --version | head -n1', shell=True)
+    # gcc = gcc.decode('utf-8').strip()
+    gcc = "gcc.exe (x86_64-posix-seh-rev0, Built by MinGW-W64 project) 7.3.0"  #  hard code gcc version for windows
     env_info['GCC'] = gcc
 
     env_info['PyTorch'] = torch.__version__

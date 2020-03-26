@@ -1,4 +1,8 @@
-# MMDetection
+# README
+This project is built on [mmdetection](https://github.com/open-mmlab/mmdetection). The purpose of this is to build perform simple object detection task to identify swimming-pool and solar-pannel given satellite images.
+![satellite](demo/satellite.PNG)
+
+# MMDetection READEME
 
 **News**: We released the technical report on [ArXiv](https://arxiv.org/abs/1906.07155).
 

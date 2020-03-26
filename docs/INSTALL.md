@@ -1,3 +1,9 @@
+# README
+This project is built on [mmdetection](https://github.com/open-mmlab/mmdetection). The purpose of this is to build perform simple object detection task to identify swimming-pool and solar-pannel given satellite images.
+
+![satellite](demo/satellite.PNG)
+
+# Initial README
 ## Installation
 
 ### Requirements
@@ -45,6 +51,9 @@ d. Install build requirements and then install mmdetection.
 ```shell
 pip install -r requirements/build.txt
 pip install "git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI"
+# uncomment below to install coco on windows
+# pip install git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
+
 pip install -v -e .  # or "python setup.py develop"
 ```
 
@@ -115,6 +124,8 @@ git clone https://github.com/open-mmlab/mmdetection.git
 cd mmdetection
 pip install -r requirements/build.txt
 pip install "git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI"
+# uncomment below to install coco on windows
+# pip install git+https://github.com/philferriere/cocoapi.git#subdirectory=PythonAPI
 pip install -v -e .
 
 mkdir data

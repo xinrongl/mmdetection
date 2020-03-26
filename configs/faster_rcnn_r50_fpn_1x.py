@@ -1,4 +1,12 @@
-IMG_SCALE = (224, 224)
+"""
+run faster rcnn on single object
+# python -W ignore tools\train.py configs\faster_rcnn_r50_fpn_1x.py --work_dir work_dirs\faster_rcnn50
+"""
+
+# global variables
+IMG_SCALE = (512, 512)
+NUM_CLASSES = 2
+
 # model settings
 model = dict(
     type='FasterRCNN',
@@ -22,8 +30,8 @@ model = dict(
         anchor_scales=[8],
         anchor_ratios=[0.5, 1.0, 2.0],
         anchor_strides=[4, 8, 16, 32, 64],
-        target_means=[.0, .0, .0, .0],
-        target_stds=[1.0, 1.0, 1.0, 1.0],
+        target_means=[.0, .0, .0, .0],  #TODO: replace target mean
+        target_stds=[1.0, 1.0, 1.0, 1.0],  #TODO: replace target std
         loss_cls=dict(
             type='CrossEntropyLoss', use_sigmoid=True, loss_weight=1.0),
         loss_bbox=dict(type='SmoothL1Loss', beta=1.0 / 9.0, loss_weight=1.0)),
@@ -39,7 +47,7 @@ model = dict(
         fc_out_channels=1024,
         roi_feat_size=7,
         # num_classes=81,
-        num_classes=3,
+        num_classes=NUM_CLASSES,
         target_means=[0., 0., 0., 0.],
         target_stds=[0.1, 0.1, 0.2, 0.2],
         reg_class_agnostic=False,
